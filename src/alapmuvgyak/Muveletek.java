@@ -50,6 +50,7 @@ public class Muveletek extends javax.swing.JFrame {
         mnuFajl = new javax.swing.JMenu();
         mnuFajlMegnyit = new javax.swing.JMenuItem();
         mnuFajlMent = new javax.swing.JMenuItem();
+        mnuFajlMentMaskent = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnuFajlKilep = new javax.swing.JMenuItem();
         mnuMuvelet = new javax.swing.JMenu();
@@ -216,6 +217,14 @@ public class Muveletek extends javax.swing.JFrame {
             }
         });
         mnuFajl.add(mnuFajlMent);
+
+        mnuFajlMentMaskent.setText("jMenuItem1");
+        mnuFajlMentMaskent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuFajlMentMaskentActionPerformed(evt);
+            }
+        });
+        mnuFajl.add(mnuFajlMentMaskent);
         mnuFajl.add(jSeparator1);
 
         mnuFajlKilep.setText("Kilép");
@@ -317,6 +326,24 @@ public class Muveletek extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuFajlMentActionPerformed
 
+    private void mnuFajlMentMaskentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuFajlMentMaskentActionPerformed
+         JFileChooser fc = new JFileChooser(new File("."));
+        fc.setDialogTitle("Fájl mentése");
+
+        int valasztottGombErteke = fc.showSaveDialog(this);
+        if (valasztottGombErteke == JFileChooser.APPROVE_OPTION) {
+            File f = fc.getSelectedFile();
+
+            lblEredmeny.setText("<html>Elérés:" + f.getPath() + "<br>Könyvtár: " + f.getName() + "</html>");
+            try {
+                Files.write(Paths.get(f.getPath(), "\\stat.txt"), "Statisztika".getBytes());
+            } catch (IOException ex) {
+                Logger.getLogger(Muveletek.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }//GEN-LAST:event_mnuFajlMentMaskentActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -380,6 +407,7 @@ public class Muveletek extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuFajlKilep;
     private javax.swing.JMenuItem mnuFajlMegnyit;
     private javax.swing.JMenuItem mnuFajlMent;
+    private javax.swing.JMenuItem mnuFajlMentMaskent;
     private javax.swing.JRadioButtonMenuItem mnuMuvKivonas;
     private javax.swing.JRadioButtonMenuItem mnuMuvOsszeadas;
     private javax.swing.JRadioButtonMenuItem mnuMuvOsztas;
